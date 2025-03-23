@@ -11,7 +11,7 @@
 export interface Product {
   id: string;
   name: string;
-  price: string;
+  price: number;
   description: string;
   size: "28mm" | "36mm" | "42mm" | null;
   category: string;
