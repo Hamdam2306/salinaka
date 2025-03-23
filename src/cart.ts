@@ -9,7 +9,7 @@ let cartProducts: Product[] = [
     description:
       "The Jon Chicken is the latest in a series of indolent products from D'Amore, West and Reichel",
     size: 22,
-    price: "22693.12",
+    price: "226.12",
     quantity: 1,
   },
   {
