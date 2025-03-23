@@ -1,13 +1,9 @@
 import type { Product } from "./types";
+import { addToCart } from "./utility";
+import { products } from "./db";
 
-let cart: string[] = [];
 
-function addToCart(productName: string) {
-  cart.push(productName);
-  console.log("Cart:", cart);
-}
-
-function renderProductDetail(product: Product) {
+export function renderProductDetail(product: Product) {
   document.body.innerHTML = "";
 
   document.body.className = "max-w-5xl m-auto bg-gray-100 p-4 md:p-10";
@@ -65,8 +61,7 @@ function renderProductDetail(product: Product) {
 
   const descriptionEl = document.createElement("p");
   descriptionEl.className = "text-gray-700 mb-4";
-  descriptionEl.textContent =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, praesentium? Corporis aperiam alias laborum maxime nostrum culpa laudantium voluptatum mollitia.";
+  descriptionEl.textContent = product.description;
   rightSide.appendChild(descriptionEl);
 
   const sizeLabel = document.createElement("label");
@@ -77,12 +72,14 @@ function renderProductDetail(product: Product) {
   const sizeSelect = document.createElement("select");
   sizeSelect.className = "border border-gray-300 rounded-md px-3 py-2 mb-4";
 
-  ["28 mm", "36 mm", "42 mm"].forEach((size) => {
+  ["28mm", "36mm", "42mm"].forEach((size) => {
     const option = document.createElement("option");
-    option.value = size;
+    option.value = size === product.size ? size : "28mm";
     option.textContent = size;
+    option.selected = size === product.size ? true : false;
     sizeSelect.appendChild(option);
   });
+
   rightSide.appendChild(sizeSelect);
 
   const colorLabel = document.createElement("p");
@@ -113,20 +110,16 @@ function renderProductDetail(product: Product) {
 
   const addButton = document.createElement("button");
   addButton.className =
-    "bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors duration-200";
-  addButton.textContent = "Add to Basket";
-  addButton.addEventListener("click", () => addToCart(product.name));
+    `bg-${product.hasCart?'white':'black'} text-${product.hasCart?'black':'white'} px-4 py-2 rounded-md hover:${product.hasCart?'bg-gray-200': 'bg-gray-800'} transition-colors duration-200 border border-black`;
+  addButton.textContent = product.hasCart
+    ? "Remove from Bascet"
+    : "Add to Basket";
+  addButton.addEventListener("click", () =>
+    addToCart(product, product.hasCart),
+  );
   rightSide.appendChild(addButton);
 }
 
-const demoProduct: Product = {
-  name: "Tiktilaok Manok",
-  price: "$78.00",
-  category: "Sexbomb",
-  imageUrl:
-    "https://cdn-images.farfetch-contents.com/16/06/97/27/16069727_30146621_2048.jpg",
-};
-
 document.addEventListener("DOMContentLoaded", () => {
-  renderProductDetail(demoProduct);
-});
+  renderProductDetail(products[0]);
+})
