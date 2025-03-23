@@ -12,8 +12,6 @@ export function addToCart(product: Product, hasCart: boolean) {
       })
     : cart.push(product);
 
-  console.log("Cart:", cart);
-
   product.hasCart = !product.hasCart;
   renderProductDetail(product);
 }
@@ -25,7 +23,7 @@ export function addToCartShop(product: Product, hasCart: boolean) {
         p.id === product.id ? cart.splice(index, 1) : null;
       })
     : cart.push(product);
-  console.log("Cart:", cart);
   product.hasCart = !product.hasCart;
+
   renderShop();
 }
