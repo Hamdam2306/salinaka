@@ -1,8 +1,9 @@
 import type { Product } from "./types";
 import { addToCart } from "./utility";
 import { products } from "./db";
+import { renderShop } from "./shop";
 
- export function renderProductDetail(product: Product) {
+export function renderProductDetail(product: Product) {
   document.body.innerHTML = "";
 
   document.body.className = "max-w-5xl m-auto bg-gray-100 p-4 md:p-10";
@@ -11,6 +12,7 @@ import { products } from "./db";
   backLink.href = "#";
   backLink.textContent = "← Back to shop";
   backLink.className = "text-blue-600 hover:text-blue-800 mb-4 inline-block";
+  backLink.addEventListener("click", () => renderShop());
   document.body.appendChild(backLink);
 
   const container = document.createElement("div");
@@ -97,28 +99,30 @@ import { products } from "./db";
       "w-6 h-6 rounded-full cursor-pointer border border-gray-200";
     colorCircle.style.backgroundColor = color;
     colorCircle.addEventListener("click", () => {
-      console.log("Selected color:", color);
     });
     colorsContainer.appendChild(colorCircle);
   });
 
   const priceEl = document.createElement("p");
-  priceEl.className = "text-2xl font-bold mb-4";
-  priceEl.textContent = product.price;
+  priceEl.className = "text-3xl font-bold mb-4";
+  priceEl.textContent = `$${product.price}`;
   rightSide.appendChild(priceEl);
 
   const addButton = document.createElement("button");
-  addButton.className =
-    `bg-${product.hasCart?'white':'black'} text-${product.hasCart?'black':'white'} px-4 py-2 rounded-md hover:${product.hasCart?'bg-gray-200': 'bg-gray-800'} transition-colors duration-200 border border-black`;
+  addButton.className = `bg-${product.hasCart ? "white" : "black"} text-${
+    product.hasCart ? "black" : "white"
+  } px-4 py-2 rounded-md hover:${
+    product.hasCart ? "bg-gray-200" : "bg-gray-800"
+  } transition-colors duration-200 border border-black`;
   addButton.textContent = product.hasCart
     ? "Remove from Bascet"
     : "Add to Basket";
   addButton.addEventListener("click", () =>
-    addToCart(product, product.hasCart),
+    addToCart(product, product.hasCart)
   );
   rightSide.appendChild(addButton);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderProductDetail(products[0]);
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   renderProductDetail(products[0]);
+// });
