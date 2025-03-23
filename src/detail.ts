@@ -1,4 +1,4 @@
-import type { Product } from "./shop";
+import type { Product } from "./types";
 
 let cart: string[] = [];
 
