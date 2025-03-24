@@ -183,7 +183,7 @@ export const products: Product[] = [
     size: "36mm",
     hasCart: false,
   },
-  
+
   {
     id: "e0ac8e45-92e6-4d93-9b56-53f416f32aa2",
     name: "The Stand",
@@ -205,6 +205,7 @@ export function clearCart() {
   cart.forEach((p) => {
     products.forEach((product) => {
       p.id === product.id ? (product.hasCart = false) : null;
+      p.quantity = 1;
     });
   });
 

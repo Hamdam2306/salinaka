@@ -2,19 +2,21 @@ import { renderCart } from "./cart";
 import { products } from "./db";
 import { renderProductDetail } from "./detail";
 import { addToCartShop } from "./utility";
+import { createNavbar } from "./navbar2";
 
 export function renderShop() {
   document.body.innerHTML = "";
+  createNavbar()
   document.body.className = "min-h-screen bg-gray-100 p-4 md:p-10";
-  const cart = document.createElement("button");
-  cart.textContent = "Cart (test)";
-  cart.className =
-    "bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors duration-200";
-  cart.addEventListener("click", () => renderCart());
-  document.body.appendChild(cart);
+    // const cart = document.createElement("button");
+    // cart.textContent = "Cart (test)";
+    // cart.className =
+    //   "bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors duration-200";
+    //  cart.addEventListener("click", () => renderCart())
+    // document.body.appendChild(cart);
 
   const gridContainer = document.createElement("div");
-  gridContainer.className = "grid grid-rows-2 grid-cols-5 gap-6";
+  gridContainer.className = "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6";
   document.body.appendChild(gridContainer);
 
   products.forEach((product) => {

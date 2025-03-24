@@ -2,28 +2,35 @@ import type { Product } from "./types";
 import { addToCart } from "./utility";
 import { renderShop } from "./shop";
 import { renderCart } from "./cart";
+import { createNavbar } from "./navbar2";
 
 export function renderProductDetail(product: Product) {
   document.body.innerHTML = "";
+  createNavbar();
 
-  document.body.className = "max-w-5xl m-auto bg-gray-100 p-4 md:p-10";
+  document.body.className = "max-w-8xl m-auto bg-gray-100 p-4 md:p-10";
 
-  const backLink = document.createElement("a");
-  backLink.href = "#";
-  backLink.textContent = "← Back to shop";
-  backLink.className = "text-blue-600 hover:text-blue-800 mb-4 inline-block";
-  backLink.addEventListener("click", () => renderShop());
-  document.body.appendChild(backLink);
+  const flexwrap = document.createElement("div");
+  flexwrap.className = "flex justify-between items-center mb-4";
 
+  // const backLink = document.createElement("a");
+  // backLink.textContent = "← Back to shop";
+  // backLink.className =
+  //   "text-blue-900 hover:text-blue-400 mb-4 inline-block text-xl";
+  // backLink.addEventListener("click", () => renderShop());
+  // document.body.appendChild(backLink);
 
-  const cart = document.createElement("button");
-  cart.textContent = "Cart (test)";
-  cart.className =
-    "bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors duration-200";
-  cart.addEventListener("click", () => renderCart());
-  document.body.appendChild(cart);
+  // const cart = document.createElement("button");
+  // cart.textContent = "Cart (test)";
+  // cart.className =
+  //   "bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors duration-200";
+  // cart.addEventListener("click", () => renderCart());
+  // document.body.appendChild(cart);
 
+  // flexwrap.appendChild(backLink);
+  // flexwrap.appendChild(cart);
 
+  document.body.appendChild(flexwrap);
 
   const container = document.createElement("div");
   container.className =
@@ -131,4 +138,3 @@ export function renderProductDetail(product: Product) {
   );
   rightSide.appendChild(addButton);
 }
-

@@ -1,9 +1,11 @@
-import type { Product } from "./types";
 import { cart, clearCart } from "./db";
+import { createNavbar } from "./navbar2";
 import { renderShop } from "./shop";
 
-export function renderCart() {
+export function renderCart(){
+  
   document.body.innerHTML = "";
+  // createNavbar()
   const basketContainer = document.createElement("div");
   basketContainer.className = "max-w-3xl mx-auto bg-white shadow-lg p-6";
 
@@ -50,7 +52,7 @@ export function renderCart() {
   const emptyBasket = document.createElement("div");
 
   const subtotalPrice = document.createElement("p");
-
+  subtotalPrice.className = 'text-2xl font-bold'
   const emptyBasketText = document.createElement("p");
   emptyBasketText.className = "text-center text-lg font-semibold mt-4";
   emptyBasketText.textContent = "Your basket is empty 😢";
@@ -167,7 +169,7 @@ export function renderCart() {
 
     subtotalPrice.textContent = `$${total}`;
   }
-
+ 
   renderCartItems();
   const subtotalContainer = document.createElement("div");
   subtotalContainer.className =
